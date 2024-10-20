@@ -75,66 +75,74 @@ failedStudents = []               #instantiate this as a blank list
 pStudentCounter = 0               #instantiate this passed student counter as an integer with initial value
 fStudentCounter =  0              #instantiate this passed student counter as an integer with initial value
 
-def counterPass():
-    global pStudentCounter
-    pStudentCounter += 1
+def counterPass():                  #create a counterPass() function in here to serve as your counter for passed students
+    global pStudentCounter          #access your global pStudentCounter here
+    pStudentCounter += 1            #create a counter here for your pStudentCounter
 
-def counterFail():
-    global fStudentCounter
-    fStudentCounter += 1
+def counterFail():                  #create a counterFail() function in here to serve as your counter for failed students 
+    global fStudentCounter          #access your global fStudentCounter here
+    fStudentCounter += 1            #create a counter here for your fStudentCounter
 
-def testGrade(name, grade, subject):
-    if grade >= 75:
-        passStudents.append(name)
+def testGrade(name, grade, subject):    #create a function testGrade() that must receive a parameter: name, grade, subject
+    if grade >= 75:                     #checks if the grade of the passed parameter is greater than or equal to 75
+        passStudents.append(name)       #if so append the following to the passStudents List: name, grade, and subject; hint: this is multiline
         passStudents.append(grade)
         passStudents.append(subject)
 
-        counterPass()
+        counterPass()                   #in every passed students call your counterPass() to increment the pStudentCounter  
     else:
-        failedStudents.append(name)
+        failedStudents.append(name)     #if so append the following to the failedStudents List: name, grade, and subject; hint: this is multiline
         failedStudents.append(grade)
         failedStudents.append(subject)
 
-        counterFail()
+        counterFail()                   #in every failed students call your counterFail() to increment the fStudentCounter
 
-def guessedNearer():
-    global userGuess, computerGuess, pStudentCounter
+def guessedNearer():  #create a function guessedNear()
+    global userGuess, computerGuess, pStudentCounter    #access locally all the global variable noted as: userGuess, computerGuess, pStudentCounter. Hint: This can be multilin
 
-    nearUGuess = pStudentCounter - int(userGuess)
-    nearCGuess = pStudentCounter - computerGuess
+    nearUGuess = pStudentCounter - int(userGuess)       #subtract the pStudentCounter with the converted datatype of userGuess
+    nearCGuess = pStudentCounter - computerGuess        #subtract the pStudentCounter with the converted datatype of userGuess
 
-    if abs(nearCGuess) < abs(nearUGuess):
-        print("")
-        print("User is Nearer",nearUGuess)
+    if abs(nearCGuess) < abs(nearUGuess):     #implement an if statement to test if the user guess's nearer than the computer's
+                                              #by comparing the nearUGuess and nearCGuess, make sure that the values are absolute
+                                             #enclosed your variables with abs() for absolute value
+        print("")                             
+        print("User is Nearer",nearUGuess)    #call the value of nearUGuess
 
-    elif abs(nearCGuess) < abs(nearUGuess):
-        print("")
+    elif abs(nearCGuess) < abs(nearUGuess):     #implement an elif statement to test if the user guess's and the computer's are the same
+                                                #by comparing the nearUGuess and nearCGuess, make sure that the values are absolute 
+                                                #enclosed your variables with abs() for absolute value
+        print("")                               
         print("User and Computer are the same")
     
     else:
         print("")
-        print("Computer Guess is Nearer", nearCGuess)
+        print("Computer Guess is Nearer", nearCGuess)   #call the value of nearCGuess
 
-def printList():
+def printList():  #create a function printList()
     print("")
     print("----------- List of Students who has a Passing Mark --------------------")
-    print(passStudents)
-    print(f"Total no. of Failed Students: {pStudentCounter}")
+    print(passStudents)     #print the list of passStudent
+    print(f"Total no. of Failed Students: {pStudentCounter}")   #use the fstring format, print out the "Total no. of Passed Students: {pStudentCounter}
 
     print("")
     print("------------ List of Students who has a Faily Mark ---------------------")
-    print(failedStudents)
-    print(f"Total no. of Failed Students: {fStudentCounter}")
+    print(failedStudents)   #print the list of failedStuden
+    print(f"Total no. of Failed Students: {fStudentCounter}")   #use the fstring format, print out the "Total no. of Failed Students: {fStudentCounter}
 
-print(f"The following are the List of Students. Total of {sizeClass}")
+print(f"The following are the List of Students. Total of {sizeClass}")  #print out using the fstring "The following are the List of Students. Total of {sizeClass}" then calls out the size of the class
 print("----------------------------------------------------")
 
-for x, obj in studentList.items():
-    print(f"{obj.get('studentName')} is enrolled in {obj.get('classSubject')}")
+for x, obj in studentList.items():      #create a for loop which will extract the items content (key:value) with x and obj vars;       
+                                         #   noting the receiving value will be "x" and "obj" for each of the items in the studentList
+    print(f"{obj.get('studentName')} is enrolled in {obj.get('classSubject')}")     #create a print out which for each of the item retrieved
+                                                                                    #   using the for loop must equate to : "{studentName} is enrolled in {classSubject}"
+                                                                                     #   utilise your .get("") for your objects to get the studentName and classSubject
+for x, obj in studentList.items():      #create a for loop which will extract the items content (key:value) with x and obj vars;
+                                        #   noting the receiving value will be "x" and "obj" for each of the items in the studentList
+    testGrade(obj.get("studentName"), obj.get("studentGrade"), obj.get("classSubject"))     #pass the following parameters to testGrade() for each retrieved item in the for loop
+                                                                                            #   studentName, studentGrade, classSubject; utilise .get("key name") to your obj var.
 
-for x, obj in studentList.items():
-    testGrade(obj.get("studentName"), obj.get("studentGrade"), obj.get("classSubject"))
-
-printList()
-guessedNearer()
+printList()         #call the printList()
+guessedNearer()     #call the guessedNear()
 
